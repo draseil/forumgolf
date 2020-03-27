@@ -17,6 +17,9 @@ http.createServer(function (req, res) {
 	for (var i = 0; i < posts.length; i++) {
 		res.write("name: " + posts[i][0] + "<br/>" + posts[i][1] + "<br/>");
 	}
-	res.write("<button>new post</button>");
+	res.write('<form action="" method="GET"><input type="text" name="username"><input type="text" name="post" required /><input type="submit" value="Post!" /></form>');
+
+    
+
     res.end();
 }).listen(8080);
