@@ -11,10 +11,12 @@ function getPosts(post) {
 }
 
 http.createServer(function (req, res) {
+  res.setHeader('Content-Type', 'text/html');
 	var q = url.parse(req.url, true).query;
 //	res.write(q.thread + '\nHello World!\n');
 	for (var i = 0; i < posts.length; i++) {
-		res.write("name: " + posts[i][0] + "\n" + posts[i][1] + "\n");
+		res.write("name: " + posts[i][0] + "<br/>" + posts[i][1] + "<br/>");
 	}
+	res.write("<button>new post</button>");
     res.end();
 }).listen(8080);
