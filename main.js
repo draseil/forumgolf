@@ -1,25 +1,20 @@
-var http = require('http');
-var url = require('url');
+var express = require("express");
+var app = express();
 
-var posts = [
-	["name", "post"],
-	["example_name", "example_post"]
-];
+app.get("/", function (req, res) {
+	res.setHeader('Content-Type', 'text/html');
+	res.write('<form action="/process_get" method="GET"><label for="username">Username:</label><input type="text" name="username"><br/><label for="post">Post: </label><input type="text" id="post" name="post" required><input type="submit" value="Post!"/></form>');
+	res.end();
+});
 
-function getPosts(post) {
-	return "name: " + post[0] + "\n" + post[1];
-}
+app.get("/process_get", function(req, res) {
+	response = {
+		username:req.query.username,
+		post:req.query.post
+	};
+	console.log(response);
+	res.end(JSON.stringify(response));
+});
 
-http.createServer(function (req, res) {
-  res.setHeader('Content-Type', 'text/html');
-	var q = url.parse(req.url, true).query;
-//	res.write(q.thread + '\nHello World!\n');
-	for (var i = 0; i < posts.length; i++) {
-		res.write("name: " + posts[i][0] + "<br/>" + posts[i][1] + "<br/>");
-	}
-	res.write('<form action="" method="GET"><input type="text" name="username"><input type="text" name="post" required /><input type="submit" value="Post!" /></form>');
 
-    
-
-    res.end();
-}).listen(8080);
+app.listen(8080);
