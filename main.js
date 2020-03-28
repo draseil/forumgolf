@@ -3,11 +3,13 @@ var body_parser = require("body-parser");
 var app = express();
 var urlencoded_parser = body_parser.urlencoded({ extended: false });
 
-var posts = [[]];
+var threads = {"first-thread" : [[]]};
 
 app.get("/", function (req, res) {
 	res.setHeader('Content-Type', 'text/html');
 	res.write('<form action="/new_post" method="POST"><label for="username">Username:</label><input type="text" name="username"><br/><label for="post">Post: </label><input type="text" id="post" name="post" required><input type="submit" value="Post!"/></form>');
+	console.log(threads);
+	var posts = threads["first-thread"];
 	for (var i = 0; i < posts.length; i++) {
 		if (posts[i][0] === undefined) {
 			continue;
