@@ -11,8 +11,10 @@ app.get("/", function (req, res) {
 	for (var i = 0; i < posts.length; i++) {
 		if (posts[i][0] === undefined) {
 			continue;
+		} else if (posts[i][0] === "") {
+			posts[i][0] = "Anonymous";
 		}
-		res.write("User: " + posts[i][0] + "<br/>" + posts[i][1] + "<br/><br/>");
+		res.write("<b>" + posts[i][0] + "</b><br/>" + posts[i][1] + "<br/><br/>");
 	}
 	res.end();
 });
